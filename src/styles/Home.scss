@@ -1,5 +1,449 @@
 .homeMain {
-  width: 100vw;
-  height: 100vh;
-  background-color: pink;
+  .topBar {
+    width: 100%;
+    height: 4.5vh;
+    background: #505050;
+    box-shadow: white 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    z-index: 999;
+    padding: 8px 0;
+
+    .wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      justify-content: space-between;
+      @media screen and (max-width: 1440px) {
+        max-width: 1100px;
+      }
+
+      .myName {
+        display: inline-block;
+        line-height: 100%;
+        font-weight: bold;
+        color: #efefef;
+        font-family: miso-bold, serif;
+        font-size: 26px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .contactList {
+        display: flex;
+        align-items: center;
+
+        a {
+          width: 37px;
+          height: 37px;
+          background-color: pink;
+          border-radius: 37px;
+          display: inline-block;
+          margin-right: 20px;
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+
+          &.linkedIn {
+            background-image: url("../images/homepage/contact/linkedin.png");
+          }
+
+          &.whatsApp {
+            background-image: url("../images/homepage/contact/whatsApp.png");
+          }
+
+          &.email {
+            background-image: url("../images/homepage/contact/email.png");
+          }
+
+          @media screen and (max-width: 1680px) {
+            width: 30px;
+            height: 30px;
+            border-radius: 35px;
+          }
+          @media screen and (max-width: 1440px) {
+            width: 24px;
+            height: 24px;
+            border-radius: 20px;
+          }
+          @media screen and (max-width: 1280px) {
+            width: 22px;
+            height: 22px;
+            border-radius: 18px;
+          }
+        }
+      }
+
+      @media screen and (max-width: 1600px) {
+        max-width: 1200px;
+        .myName {
+          font-size: 22px;
+        }
+      }
+      @media screen and (max-width: 1280px) {
+        max-width: 1000px;
+        .myName {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .landingView {
+    background-color: rgb(239, 206, 217);
+
+    .tableBackground {
+      background-color: rgb(239, 206, 217);
+      margin: 0 auto;
+      width: 100%;
+      max-width: 1700px;
+      height: auto;
+      position: relative;
+
+      .firstBackground {
+        width: 100%;
+      }
+
+      .clock {
+        max-width: 240px;
+        width: 9.6%;
+        position: absolute;
+        top: 14%;
+        left: 16.9%;
+
+        &.minuteClock {
+          img {
+            width: 100%;
+            height: auto;
+            animation: clockSpin 6s ease-in-out infinite;
+          }
+        }
+
+        &.secondClock {
+          img {
+            width: 100%;
+            height: auto;
+            animation: clockSpin 4s ease-in-out infinite;
+          }
+        }
+      }
+
+      .documentPic {
+        position: absolute;
+        top: 34.9%;
+        left: 24%;
+        width: 22%;
+
+        img {
+          width: 100%;
+          animation: documentSwing 3s ease-in-out infinite;
+        }
+      }
+
+      .documentPic2 {
+        position: absolute;
+        top: 48.2%;
+        left: 46.4%;
+        width: 18%;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .tree1 {
+        position: absolute;
+        top: 50%;
+        left: 71.1%;
+        width: 10.9%;
+        z-index: 2;
+
+        img {
+          width: 100%;
+          animation: treePop 2s ease-in-out infinite;
+        }
+      }
+
+      .tree2 {
+        position: absolute;
+        top: 39.9%;
+        left: 77.7%;
+        width: 11.6%;
+
+        img {
+          width: 100%;
+          animation: treePop 2s ease-in-out infinite;
+          animation-delay: 1.2s;
+        }
+      }
+
+      .pinkDot {
+        position: absolute;
+        top: 22.9%;
+        left: 60.7%;
+        width: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-height: 28px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          margin-left: -2%;
+
+          &.pinkDot1 {
+            width: 20%;
+            animation: pinkDotPop ease-in-out infinite 1.5s;
+          }
+
+          &.pinkDot2 {
+            width: 24%;
+            animation: pinkDotPop ease-in-out infinite 1.5s;
+            animation-delay: .5s;
+          }
+
+          &.pinkDot3 {
+            width: 28%;
+            animation: pinkDotPop ease-in-out infinite 1.5s;
+            animation-delay: 1s;
+          }
+        }
+      }
+    }
+  }
+
+  .aboutMe {
+    width: 100%;
+    height: 75vh;
+    background: linear-gradient(180deg, rgba(240, 206, 217, 1) 0%, rgba(244, 214, 222, 1) 100%);
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0%;
+
+    .avatar {
+      width: 50%;
+      position: relative;
+      margin-left: -10%;
+
+      img {
+        width: 55%;
+        z-index: 99;
+        position: absolute;
+        top: -10%;
+        left: 30%;
+      }
+
+      .circleBackground {
+        background-color: white;
+        width: 80%;
+        height: 49vh;
+        border-radius: 100%;
+        transform: rotate(15deg);
+        position: absolute;
+        right: 3%;
+        top: 5%;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+      }
+    }
+
+    .introduction {
+      margin-left: 4%;
+
+      h1 {
+        font-family: Comic Sans MS, serif;
+        font-size: 40px;
+        white-space: pre-wrap;
+        max-width: 540px;
+        margin: 0;
+        //line-height: 50px;
+        font-weight: normal;
+      }
+
+      p {
+        font-weight: normal;
+        font-size: 22px;
+        max-width: 540px;
+        font-family: Comic Sans MS, serif;
+        display: inline-block;
+        margin-top: 35px;
+        color: #4f4d4d;
+      }
+
+      @media screen and (max-width: 1680px) {
+        h1 {
+          font-size: 30px;
+        }
+        p {
+          font-size: 18px;
+          max-width: 300px;
+        }
+      }
+      @media screen and (max-width: 1440px) {
+        h1 {
+          font-size: 20px;
+        }
+        p {
+          font-size: 13px;
+          max-width: 250px;
+        }
+      }
+
+      .adventureButton {
+        width: fit-content;
+        height: auto;
+        background-color: transparent;
+        line-height: 50px;
+        font-size: 30px;
+        margin-top: 10%;
+        padding: 5px 20px;
+        border: 1px solid lightslategrey;
+        border-radius: 7px;
+        color: black;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: all 1s;
+
+        &::after {
+          display: inline-block;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: rgb(254, 230, 227);
+          position: absolute;
+          top: 14%;
+          left: 4%;
+          transform: translateZ(-1px);
+          transition: all .3s;
+          border-radius: 7px;
+        }
+
+        &:hover {
+          cursor: pointer;
+
+          &::after {
+            top: 0;
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .emailContactMe {
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    background-image: url("../images/homepage/contact/contact_background.jpg");
+    background-size: cover;
+    padding-bottom: 10vh;
+    overflow: hidden;
+    .leftContent {
+      margin-left: 12%;
+      margin-top: 12%;
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      h2 {
+        width: fit-content;
+        font-family: Comic Sans MS, serif;
+      }
+      input {
+        width: 110%;
+        min-height: 40px;
+        border-radius: 7px;
+        text-indent: 3%;
+        font-family: Comic Sans MS, serif;
+        font-size: 18px;
+        border: none;
+        &:focus {
+          outline: none;
+        }
+      }
+      .textContent {
+        width: 102%;
+        border-radius: 7px;
+        border: none;
+        margin-top: 5%;
+        line-height: 100%;
+        min-height: 200px;
+        font-size: 18px;
+        font-family: Comic Sans MS, serif;
+        padding: 4%;
+        &:focus {
+          outline: none;
+        }
+      }
+      .sendMessage {
+        margin-top: 8%;
+        width: 70%;
+        background-color: #98B8F1;
+        border: none;
+        border-radius: 10px;
+        line-height: 54px;
+        font-family: Comic Sans MS, serif;
+        font-size: 20px;
+        transition: all .45s;
+        color: #efefef;
+        &:hover {
+          cursor: pointer;
+          background-color: #f3a6ad;
+        }
+      }
+    }
+  }
+}
+
+@keyframes clockSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes documentSwing {
+  0% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes treePop {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.13);
+  }
+  40% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pinkDotPop {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(3px);
+  }
+  20% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
