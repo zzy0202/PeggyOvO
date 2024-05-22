@@ -49,6 +49,10 @@
             background-image: url("../images/homepage/contact/linkedin.png");
           }
 
+          &.github {
+            background-image: url("../images/homepage/contact/github.png");
+          }
+
           &.whatsApp {
             background-image: url("../images/homepage/contact/whatsApp.png");
           }
@@ -340,6 +344,7 @@
     background-size: cover;
     padding-bottom: 10vh;
     overflow: hidden;
+
     .leftContent {
       margin-left: 12%;
       margin-top: 12%;
@@ -347,10 +352,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+
       h2 {
         width: fit-content;
         font-family: Comic Sans MS, serif;
       }
+
       input {
         width: 110%;
         min-height: 40px;
@@ -359,10 +366,12 @@
         font-family: Comic Sans MS, serif;
         font-size: 18px;
         border: none;
+
         &:focus {
           outline: none;
         }
       }
+
       .textContent {
         width: 102%;
         border-radius: 7px;
@@ -373,10 +382,12 @@
         font-size: 18px;
         font-family: Comic Sans MS, serif;
         padding: 4%;
+
         &:focus {
           outline: none;
         }
       }
+
       .sendMessage {
         margin-top: 8%;
         width: 70%;
@@ -388,6 +399,7 @@
         font-size: 20px;
         transition: all .45s;
         color: #efefef;
+
         &:hover {
           cursor: pointer;
           background-color: #f3a6ad;

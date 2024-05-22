@@ -1,14 +1,29 @@
 .resumeMain {
   .scene1 {
     .onGround {
-      background-color: rgb(0,191,243);
+      background-color: rgb(0, 191, 243);
       height: 79vh;
       width: 300vw;
+      position: relative;
+
+      .cloud {
+        @extend .cloudBasic;
+        position:absolute ;
+      }
     }
+
     .ground {
-      background-color: rgb(141,198,63);
+      background-color: rgb(141, 198, 63);
       height: 5vh;
       width: 300vw;
     }
+  }
+
+  .cloudBasic {
+    width: 4%;
+    height: 12%;
+    background-image: url("../images/myResume/cloud.png");
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 }

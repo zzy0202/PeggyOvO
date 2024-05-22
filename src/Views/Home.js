@@ -6,9 +6,7 @@ import documentPicture2 from "../images/homepage/picture2.png"
 import tree1Picture from "../images/homepage/pop_tree_right1.png"
 import tree2Picture from "../images/homepage/pop_tree_right2.png"
 import pinkDotPicture from "../images/homepage/dot.png"
-import linkedinPicture from "../images/homepage/contact/linkedin.png"
-import whatsAppPicture from "../images/homepage/contact/whatsApp.png"
-import emailPicture from "../images/homepage/contact/email.png"
+
 import myAvatar from "../images/homepage/contact/avatar.png"
 
 import "../styles/Home.scss"
@@ -28,17 +26,18 @@ function Home() {
 				let contactDetails = [
 						{
 								url: "https://www.linkedin.com/in/peggy-choo-82a047232/",
-								imageUrl: linkedinPicture,
 								className: "linkedIn"
 						},
 						{
+								url: "https://github.com/zzy0202",
+								className: "github"
+						},
+						{
 								url: "https://api.whatsapp.com/send?phone=601162041835&text=HelloWorld!",
-								imageUrl: whatsAppPicture,
 								className: "whatsApp"
 						},
 						{
 								url: "mailto:yung@hotmail.my",
-								imageUrl: emailPicture,
 								className: "email",
 						}
 				]
