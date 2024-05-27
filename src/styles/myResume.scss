@@ -1,29 +1,237 @@
 .resumeMain {
   .scene1 {
+    -webkit-user-select: none;
+    width: 100vw;
+    overflow: hidden;
+
     .onGround {
       background-color: rgb(0, 191, 243);
-      height: 79vh;
+      height: 80vh;
       width: 300vw;
       position: relative;
+      transition: left 0.6s ease-out;
+
+      .resumeTitle {
+        height: 10%;
+        display: flex;
+        position: absolute;
+        top: calc(50% - 13%);
+        left: 14%;
+
+        .content {
+          height: 67%;
+          background-color: rgb(237, 28, 36);
+          margin: 0;
+          line-height: 100%;
+          display: flex;
+          align-items: center;
+          padding: 0 8%;
+          white-space: nowrap;
+          color: white;
+          font-family: Comic Sans MS, serif;
+          @media screen and (max-width: 1680px) {
+            font-size: 20px;
+          }
+          @media screen and (max-width: 1280px) {
+            font-size: 16px;
+          }
+        }
+
+        img {
+          height: 100%;
+        }
+      }
+
+      .characterWalking {
+        width: 4%;
+        height: 23%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        left: 10%;
+        z-index: 999;
+        transition: left .5s;
+        background-image: url("../images/myResume/character/idle/Idle_1.png");
+      }
+
+      .characterFall {
+        width: 4%;
+        height: 23%;
+        background-size: 100% 100%;
+        position: absolute;
+        background-repeat: no-repeat;
+        left: 10%;
+        z-index: 999;
+        background-image: url("../images/myResume/character/fall/Fall_1.png");
+        animation: characterFallAnimation 1s linear infinite;
+        transition: bottom 1s;
+      }
 
       .cloud {
         @extend .cloudBasic;
-        position:absolute ;
+        position: absolute;
+      }
+
+      .tree {
+        position: absolute;
       }
     }
 
-    .ground {
-      background-color: rgb(141, 198, 63);
-      height: 5vh;
+
+    .underGround {
+      height: 20vh;
       width: 300vw;
+      position: relative;
+      transition: left 0.6s ease-out;
+
+      background-image: url("../images/myResume/ground.png");
+
+      .ground {
+        background-image: url("../images/myResume/grass.png");
+        height: 5.2vh;
+        width: 300vw;
+        max-height: 50px;
+        background-size: contain;
+      }
+
+      .tipsTutorial {
+        font-size: 31px;
+        color: white;
+        font-weight: bold;
+        width: 100vw;
+        text-align: center;
+        position: relative;
+        top: 20%;
+        animation: flashWord 1.3s ease-in-out infinite;
+        font-family: Comic Sans MS, serif;
+      }
     }
   }
 
   .cloudBasic {
-    width: 4%;
-    height: 12%;
+    width: 2.88%;
+    height: 14.21%;;
     background-image: url("../images/myResume/cloud.png");
     background-repeat: no-repeat;
     background-size: contain;
   }
+}
+
+@keyframes characterWalk {
+  0% {
+    background-image: url("../images/myResume/character/walk/Walk_1.png");
+  }
+  7.14% {
+    background-image: url("../images/myResume/character/walk/Walk_2.png");
+  }
+  14.28% {
+    background-image: url("../images/myResume/character/walk/Walk_3.png");
+  }
+  21.42% {
+    background-image: url("../images/myResume/character/walk/Walk_4.png");
+  }
+  28.56% {
+    background-image: url("../images/myResume/character/walk/Walk_5.png");
+  }
+  35.70% {
+    background-image: url("../images/myResume/character/walk/Walk_6.png");
+  }
+  42.84% {
+    background-image: url("../images/myResume/character/walk/Walk_7.png");
+  }
+  50% {
+    background-image: url("../images/myResume/character/walk/Walk_8.png");
+  }
+
+
+  57.14% {
+    background-image: url("../images/myResume/character/walk/Walk_7.png");
+  }
+  64.28% {
+    background-image: url("../images/myResume/character/walk/Walk_6.png");
+  }
+  71.42% {
+    background-image: url("../images/myResume/character/walk/Walk_5.png");
+  }
+  78.56% {
+    background-image: url("../images/myResume/character/walk/Walk_4.png");
+  }
+  85.70% {
+    background-image: url("../images/myResume/character/walk/Walk_3.png");
+  }
+  92.84% {
+    background-image: url("../images/myResume/character/walk/Walk_2.png");
+  }
+  100% {
+    background-image: url("../images/myResume/character/walk/Walk_1.png");
+  }
+}
+
+@keyframes characterFallAnimation {
+  0% {
+    background-image: url("../images/myResume/character/fall/Fall_1.png");
+    bottom: 100%;
+  }
+  7.14% {
+    background-image: url("../images/myResume/character/fall/Fall_2.png");
+  }
+  14.28% {
+    background-image: url("../images/myResume/character/fall/Fall_3.png");
+  }
+  21.42% {
+    background-image: url("../images/myResume/character/fall/Fall_4.png");
+  }
+  28.56% {
+    background-image: url("../images/myResume/character/fall/Fall_5.png");
+  }
+  35.70% {
+    background-image: url("../images/myResume/character/fall/Fall_6.png");
+  }
+  42.84% {
+    background-image: url("../images/myResume/character/fall/Fall_7.png");
+  }
+  50% {
+    background-image: url("../images/myResume/character/fall/Fall_8.png");
+  }
+
+
+  57.14% {
+    background-image: url("../images/myResume/character/fall/Fall_7.png");
+  }
+  64.28% {
+    background-image: url("../images/myResume/character/fall/Fall_6.png");
+  }
+  71.42% {
+    background-image: url("../images/myResume/character/fall/Fall_5.png");
+  }
+  78.56% {
+    background-image: url("../images/myResume/character/fall/Fall_4.png");
+  }
+  85.70% {
+    background-image: url("../images/myResume/character/fall/Fall_3.png");
+  }
+  92.84% {
+    background-image: url("../images/myResume/character/fall/Fall_2.png");
+  }
+  100% {
+    background-image: url("../images/myResume/character/fall/Fall_1.png");
+    bottom: -1%;
+  }
+}
+
+@keyframes flashWord {
+  0% {
+    display: block;
+  }
+  80% {
+    display: none;
+  }
+  100% {
+    display: none;
+  }
+}
+
+
+::-webkit-scrollbar {
+  display: none;
 }

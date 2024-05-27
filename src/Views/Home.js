@@ -50,6 +50,8 @@ function Home() {
 				navigate("/myResume");
 		}
 
+		console.log("slalsa,ls")
+
 		return (
 				<div className={'homeMain'}>
 						<div className="topBar">
@@ -108,7 +110,9 @@ function Home() {
 										<h2>Please feel free to contact me!</h2>
 										<input type="text" placeholder={"Email address"}/>
 										<textarea type="text" className={"textContent"} placeholder={"Say something ;)"}></textarea>
-										<button className={"sendMessage"}>Send Message</button>
+										<div className={"sendButtonWrap"}>
+												<button className={"sendMessage"}>Send Message</button>
+										</div>
 								</div>
 						</div>
 				</div>
