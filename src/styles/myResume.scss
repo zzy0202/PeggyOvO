@@ -1,15 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&family=Sawarabi+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+
+
 .resumeMain {
+  display: flex;
+  overflow: hidden;
+
   .scene1 {
     -webkit-user-select: none;
     width: 100vw;
-    overflow: hidden;
+    position: relative;
+    transition: left 0.6s ease-out;
 
     .onGround {
       background-color: rgb(0, 191, 243);
       height: 80vh;
-      width: 300vw;
+      width: 280vw;
       position: relative;
-      transition: left 0.6s ease-out;
 
       .resumeTitle {
         height: 10%;
@@ -63,8 +70,140 @@
         left: 10%;
         z-index: 999;
         background-image: url("../images/myResume/character/fall/Fall_1.png");
-        animation: characterFallAnimation 1s linear infinite;
+        animation: characterFallAnimation 1s linear;
         transition: bottom 1s;
+      }
+
+      .mySkill {
+        position: absolute;
+        left: 56.7%;
+        height: 100%;
+        width: 23%;
+        display: flex;
+        //align-items: center;
+        align-items: flex-end;
+        //opacity: 1;
+        //transition: opacity 1s;
+        //&.noDisplay {
+        //  opacity: 0;
+        //}
+
+        .gradeLevel {
+          width: 100%;
+          height: 60%;
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+          margin-bottom: 6%;
+
+          .grade {
+            width: 100%;
+            font-family: "Poetsen One", sans-serif;
+            color: white;
+            font-size: 20px;
+            padding-bottom: 1%;
+            border-bottom: 1px solid white;
+          }
+        }
+
+        .skillGrade {
+          position: absolute;
+          height: 80%;
+          display: flex;
+          width: 80%;
+          justify-content: center;
+          right: 5%;
+
+          .skillCategory {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            //background-color: #f7941d;
+            .skillName {
+              height: 40px;
+              width: fit-content;
+              background-color: #f7941d;
+              position: relative;
+              font-size: 24px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: white;
+
+
+              &::before {
+                display: inline-block;
+                content: "";
+                background-image: url("../images/myResume/scene1/skill_flag_left.png");
+                width: 20px;
+                height: 100%;
+                position: relative;
+                left: -6px;
+              }
+
+              &::after {
+                display: inline-block;
+                content: "";
+                background-image: url("../images/myResume/scene1/skill_flag_right.png");
+                width: 20px;
+                height: 100%;
+                position: relative;
+                right: -6px;
+              }
+            }
+
+            .flower {
+              height: 100%;
+              width: 106%;
+              position: relative;
+              overflow: hidden;
+              opacity: 0;
+              transition-property: opacity;
+
+              &.display {
+                opacity: 1;
+              }
+
+              //.flowerTop {
+              //  width: 100%;
+              //  height: 250px;
+              //  background-image: url("../images/myResume/scene1/plantHead.png");
+              //  position: absolute;
+              //  background-repeat: no-repeat;
+              //  background-size: contain;
+              //  z-index: 99;
+              //}
+
+              .flowerStem {
+                height: 100%;
+                width: 4%;
+                background-color: #a67c52;
+                margin: 0 auto;
+                position: absolute;
+                left: calc(50% - 2%);
+                z-index: 1;
+                bottom: -8%;
+
+                &::before {
+                  width: 152px;
+                  height: 250px;
+                  background-image: url("../images/myResume/scene1/plantHead.png");
+                  position: absolute;
+                  background-repeat: no-repeat;
+                  background-size: contain;
+                  z-index: 99;
+                  display: inline-block;
+                  content: "";
+                  left: -73px;
+                  top: -40px;
+                }
+              }
+            }
+          }
+        }
       }
 
       .cloud {
@@ -75,12 +214,319 @@
       .tree {
         position: absolute;
       }
+
+      .gate {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+
+        img {
+          height: 100%;
+        }
+
+        span {
+          position: absolute;
+          white-space: nowrap;
+          margin-top: 2.4%;
+          font-family: Comic Sans MS, serif;
+          color: white;
+          font-size: 60px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .onConstruction {
+      width: 400vw;
+      background-color: rgb(0, 191, 243);
+      height: 80vh;
+      position: absolute;
+      top: 0;
+      left: 280vw;
+
+      .titleExperience {
+        width: 15%;
+        height: 50%;
+        background-image: url("../images/myResume/constructionSite/experience_title.png");
+        position: absolute;
+        bottom: -3%;
+        left: 0%;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .boxes {
+        width: 700px;
+        height: 100px;
+        left: 6%;
+        background-image: url("../images/myResume/constructionSite/box.png");
+        position: absolute;
+        bottom: 0;
+      }
+
+      .firstExperience, .experience {
+        width: 13%;
+        height: 100%;
+        position: absolute;
+        left: 17%;
+
+        .educationExperienceTitle {
+          display: flex;
+          width: fit-content;
+          margin: 0 auto;
+          position: relative;
+          top: 5%;
+          z-index: 1;
+
+          span {
+            display: inline-block;
+          }
+
+          .leftRibbon, .rightRibbon {
+            width: 55px;
+            height: 75px;
+            background-repeat: no-repeat;
+          }
+
+          .rightRibbon {
+            background-image: url("../images/myResume/ribbon_right.png");
+          }
+
+          .leftRibbon {
+            background-image: url("../images/myResume/ribbon_left.png");
+          }
+
+          h2 {
+            font-family: Comic Sans MS, serif;
+            width: fit-content;
+            background-color: #ed1c24;
+            height: fit-content;
+            color: white;
+            line-height: 50px;
+            font-weight: bold;
+            margin: 0 auto;
+            white-space: nowrap;
+          }
+        }
+
+        .chainBoxMain {
+          width: 65%;
+          height: 79%;
+          position: absolute;
+          top: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          z-index: 0;
+
+          .chainString {
+            width: 6%;
+            border-left: 4px solid rgb(68, 68, 68);
+            border-right: 4px solid rgb(68, 68, 68);
+            height: 30%;
+            position: relative;
+            left: -2%;
+            margin-bottom: 5%;
+
+            &::after {
+              width: 251%;
+              height: 49%;
+              display: inline-block;
+              content: "";
+              background-image: url("../images/myResume/constructionSite/chain_block.png");
+              position: absolute;
+              bottom: -23.5%;
+              left: -72%;
+              background-size: contain;
+              background-repeat: no-repeat;
+            }
+          }
+
+          .experienceBox {
+            width: 100%;
+            height: 63%;
+            background-color: #444;
+            margin-top: 1.5%;
+            border: 10px solid #777;
+            padding: 4% 5%;
+            box-sizing: border-box;
+            font-size: 23px;
+            color: white;
+
+            h3 {
+              color: white;
+              font-weight: normal;
+              margin: 0 0 4%;
+              white-space: nowrap;
+              font-family: "Poetsen One", sans-serif;
+            }
+
+            .schoolName {
+              font-size: 30px;
+              font-weight: bold;
+              font-family: "Poetsen One", sans-serif;
+              max-width: 420px;
+            }
+
+            .major {
+              margin-top: 5%;
+              font-family: "Poetsen One", sans-serif;
+            }
+
+            p {
+              font-size: 20px;
+              max-width: 382px;
+            }
+          }
+        }
+
+        .robotMain {
+          width: 50.3%;
+          height: 51.7%;
+          position: absolute;
+          right: 0;
+          z-index: 2;
+          top: calc(50% - 20%);
+          background: url("../images/myResume/constructionSite/robot1.png") no-repeat;
+          background-size: cover;
+
+          &::before {
+            width: 32%;
+            height: 34.25%;
+            display: inline-block;
+            content: "";
+            background: url("../images/myResume/constructionSite/robot1_hand.png") no-repeat;
+            position: absolute;
+            bottom: -21%;
+            left: -12.5%;
+            animation: robotHandRotates 3s infinite linear;
+            //-17.5%
+          }
+
+          &::after {
+            width: 32%;
+            height: 34.25%;
+            display: inline-block;
+            content: "";
+            background: url("../images/myResume/constructionSite/robot1_hand.png") no-repeat;
+            position: absolute;
+            bottom: -21%;
+            right: -12.5%;
+            animation: robotHandRotates 3s infinite linear;
+          }
+
+          .content {
+            margin: 0 auto;
+            width: 60%;
+            height: 80%;
+            position: relative;
+            top: 17%;
+
+            ul {
+              color: white;
+              font-family: "Poetsen One", sans-serif;
+              line-height: 30px;
+            }
+          }
+        }
+      }
+
+      .secondExperience {
+        left: 38%;
+
+        .squidMain {
+          width: 45.27%;
+          height: 70.47%;
+          background-image: url("../images/myResume/constructionSite/squid.png");
+          position: absolute;
+          background-repeat: no-repeat;
+          background-size: contain;
+          top: 20%;
+          right: 2%;
+          .content {
+            width: 66.66%;
+            height: 55.27%;
+            border-radius: 66%;
+            background-color: rgb(237,28,36);
+            margin: 0 auto;
+            position: relative;
+            top: 3.5%;
+            .smallCircle {
+              width: 100%;
+              height: 100%;
+              background-image: url("../images/myResume/constructionSite/piechart-front.png");
+            }
+          }
+          .squidTentacle {
+            width: 17.77%;
+            height: 15.26%;
+            background-image: url("../images/myResume/constructionSite/squid_hand_close.png");
+            position: absolute;
+            bottom: 12%;
+            left: -11%;
+            &.tentacle1 {
+              bottom: -5%;
+              left: 9%;
+            }
+            &.tentacle2 {
+              bottom: -5%;
+              left: 73.2%;
+              transform: rotateY(180deg);
+            }
+            &.tentacle3 {
+              bottom: 12%;
+              left: 93.2%;
+              transform: rotateY(180deg);
+            }
+          }
+        }
+        .experienceBox {
+          p {
+            max-width: 490px !important;
+          }
+        }
+      }
+
+      .factory {
+        width: 11%;
+        height: 68%;
+        position: absolute;
+        bottom: 0;
+        left: 29.4%;
+        box-sizing: border-box;
+        background-color: rgb(85, 85, 85);
+        border-top: 40px solid rgb(170, 170, 170);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        .window {
+          width: 71.33%;
+          height: 20.6%;
+          background-image: url("../images/myResume/constructionSite/window.png");
+          background-size: contain;
+          position: relative;
+          top: 7%;
+        }
+
+        .door {
+          width: 71.73%;
+          height: 60%;
+          background-color: rgb(51, 51, 51);
+        }
+      }
+
+      .cloud {
+        @extend .cloudBasic;
+        position: absolute;
+      }
     }
 
 
     .underGround {
       height: 20vh;
-      width: 300vw;
+      width: 500vw;
       position: relative;
       transition: left 0.6s ease-out;
 
@@ -89,9 +535,31 @@
       .ground {
         background-image: url("../images/myResume/grass.png");
         height: 5.2vh;
-        width: 300vw;
+        width: 280vw;
         max-height: 50px;
         background-size: contain;
+      }
+
+      .constructionGround {
+        height: 20vh;
+        width: 300vw;
+        background-color: #444;
+        position: absolute;
+        transition: none;
+        top: 0;
+        left: 280vw;
+
+        .floor {
+          width: 300vw;
+          height: 25%;
+          background: url("../images/myResume/constructionSite/floor.png");
+        }
+
+        .constructUnderground {
+          width: 300vw;
+          height: 75%;
+          background: url("../images/myResume/constructionSite/ground.png");
+        }
       }
 
       .tipsTutorial {
@@ -108,12 +576,48 @@
     }
   }
 
+
   .cloudBasic {
     width: 2.88%;
     height: 14.21%;;
     background-image: url("../images/myResume/cloud.png");
     background-repeat: no-repeat;
     background-size: contain;
+  }
+}
+
+@keyframes robotHandRotates {
+  0% {
+    transform: rotateY(0);
+  }
+  20% {
+    //left: -16.5%;
+    transform: rotateY(180deg);
+  }
+  40% {
+    transform: rotateY(0deg);
+    //left: -12.5%;
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes tentacleAnimation {
+  0% {
+    background-image: url("../images/myResume/constructionSite/squid_hand_close.png");
+  }
+  5% {
+    background-image: url("../images/myResume/constructionSite/squid_hand_open.png");
+  }
+  10% {
+    background-image: url("../images/myResume/constructionSite/squid_hand_close.png");
+  }
+  15% {
+    background-image: url("../images/myResume/constructionSite/squid_hand_open.png");
+  }
+  100% {
+    background-image: url("../images/myResume/constructionSite/squid_hand_open.png");
   }
 }
 

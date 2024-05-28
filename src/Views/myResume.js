@@ -1,15 +1,30 @@
 import "../styles/myResume.scss"
-import {cloudConfig, treeConfig, pictureConfig} from "../sceneConfig/sceneConfig";
+import {cloudConfig, treeConfig, pictureConfig, gateConfig} from "../sceneConfig/sceneConfig";
 import {useEffect, useRef, useState} from "react";
+import "animate.css"
 
 let timer = null;
+let initialTimer = null;
 
 function MyResume() {
 		let numberList = ["One", "Two", "Three", "Four"];
+		let animationList = ["animate__bounceInUp display"]
 		let characterDom = useRef();
-		let [dogAnimation, setDogAnimation] = useState({left: "10%",bottom:"-1.7%"});
+		let [dogAnimation, setDogAnimation] = useState({left: "10%", bottom: "-1.7%"});
 		let [sceneMove, setSceneMove] = useState({left: "0%"});
 		let [dogClassName, setDogClassName] = useState("characterFall");
+		let gradeLevel = ["BEGINNER", "ELEMENTARY", 'INTERMEDIATE', "ADVANCED", "EXPERT"];
+		let skillDom = useRef();
+		let [animateShowDomList, setAnimateShowDomList] = useState([]);
+		let [animationClassName, setAnimationClassName] = useState([]);
+		let [characterMoveDistance, setCharacterMoveDistance] = useState();
+		let [fallingEnd, setFallingEnd] = useState(0);
+		let workExperience = [
+				{work:"Vue2",percent:"80%"},
+				{work:"React",percent:"15%"},
+				{work:"Node",percent:"5%"},
+		]
+
 
 		function getCloud(sceneNumber) {
 				let getCloudInfo = cloudConfig[`scene${numberList[sceneNumber - 1]}Config`];
@@ -24,37 +39,68 @@ function MyResume() {
 				return arr
 		}
 
+		//初始化渲染函数
 		useEffect(() => {
-				window.onkeydown = (e) => {
-						if (timer === null && e.key === 'ArrowRight') {
+				let timer = setTimeout(() => {
+						setFallingEnd(1);
+						clearTimeout(timer);
+				}, 1100)
+				animateShowDomList.push(skillDom)
+		}, [])
+
+		useEffect(() => {
+				for (const [index, animationElement] of animateShowDomList.entries()) {
+						let {offsetLeft} = animationElement.current;
+						console.log(characterMoveDistance, offsetLeft);
+						if (offsetLeft - characterDom.current.offsetLeft <= 350 && offsetLeft !== 0 && !isNaN(characterMoveDistance)) {
+								animationElement.current.className = animationElement.current.className.replace("noDisplay", "");
+								let temp = animationClassName;
+								temp[index] = animationList[index];
+								setAnimationClassName([...temp]);
+						}
+				}
+		}, [characterMoveDistance, animateShowDomList])
+
+		useEffect(() => {
+				initialTimer = window.onkeydown = (e) => {
+						if (timer === null && e.key === 'ArrowRight' && fallingEnd) {
 								let left = parseInt(dogAnimation.left.split("%")[0]);
 								let sceneLeft = parseInt(sceneMove.left.split("%")[0]);
-								setDogAnimation({...dogAnimation,transform:"rotateY(0deg)", animation: "characterWalk .5s ease-out", left: left + 2 + "%"})
-								setSceneMove({...sceneMove,left: `${sceneLeft-6}%`})
-								console.log(sceneLeft);
+								setDogAnimation({
+										...dogAnimation,
+										transform: "rotateY(0deg)",
+										animation: "characterWalk .5s ease-out",
+										left: left + 3 + "%"
+								})
+								setSceneMove({...sceneMove, left: `${sceneLeft - 8.6}%`})
 								timer = setTimeout(() => {
 										timer = null;
-										setDogAnimation({...dogAnimation,transform:"rotateY(0deg)", animation: "none", left: left + 2 + "%"})
+										setCharacterMoveDistance(characterDom.current.offsetLeft);
+										setDogAnimation({...dogAnimation, transform: "rotateY(0deg)", animation: "none", left: left + 3 + "%"})
 										clearTimeout(timer);
 								}, 200)
 						}
-						if (timer === null && e.key === 'ArrowLeft') {
+						if (timer === null && e.key === 'ArrowLeft' && fallingEnd) {
 								let left = parseInt(dogAnimation.left.split("%")[0]);
 								let sceneLeft = parseInt(sceneMove.left.split("%")[0]);
-								if(sceneLeft===0) {
+								if (sceneLeft === 0) {
 										return;
 								}
-								setDogAnimation({...dogAnimation,transform:"rotateY(180deg)", animation: "characterWalk .5s ease-out", left: left - 2 + "%"})
-								setSceneMove({...sceneMove,left: `${sceneLeft+6}%`})
-								console.log(sceneLeft);
+								setDogAnimation({
+										...dogAnimation,
+										transform: "rotateY(180deg)",
+										animation: "characterWalk .5s ease-out",
+										left: left - 3 + "%"
+								})
+								setSceneMove({...sceneMove, left: `${sceneLeft + 8.6}%`})
 								timer = setTimeout(() => {
 										timer = null;
-										setDogAnimation({...dogAnimation,transform:"rotateY(180deg)", animation: "none", left: left - 2 + "%"})
+										setDogAnimation({...dogAnimation, transform: "rotateY(180deg)", animation: "none", left: left - 3 + "%"})
 										clearTimeout(timer);
 								}, 200)
 						}
 				}
-		}, [dogAnimation])
+		}, [dogAnimation, fallingEnd])
 
 		function getTree(sceneNumber) {
 				let getTreeInfo = treeConfig[`scene${numberList[sceneNumber - 1]}Config`];
@@ -68,15 +114,59 @@ function MyResume() {
 				return arr;
 		}
 
-		setTimeout(()=>{
-				setDogClassName(dogClassName.replace("characterFall","characterWalking"));
-		},1000)
+		function getGate() {
+				let arr = [];
+				for (let i = 0; i < gateConfig.length; i++) {
+						let {width, bottom, left, zIndex, url, innerText} = gateConfig[i];
+						arr.push(
+								<div key={width.toString()} style={{width, bottom, left, zIndex}} className={"gate"}>
+										<img src={url} style={{width: "100%"}} alt="gate"/>
+										<span>{innerText}</span>
+								</div>
+						)
+				}
+				return arr
+		}
+
+		function getGradeLevel() {
+				return gradeLevel.reverse().map(grade => {
+						return (
+								<div key={grade} className={`grade ${grade}`}>{grade}</div>
+						)
+				})
+		}
+
+		function getSkillGradeResult() {
+				let skillInfo = [
+						{name: "Html", level: 4.6},
+						{name: "CSS", level: 4.8},
+						{name: "Javascript", level: 5.2},
+						{name: "Vue", level: 5.2},
+						{name: "React", level: 3.9},
+						{name: "NodeJS", level: 3.1},
+				]
+				return skillInfo.map((info, index) =>
+						(<div key={info.name} className={"skillCategory animateElement"}>
+								<div className="skillName">{info.name}</div>
+								<div className={`flower ${animationClassName[0]}`}
+													style={{transitionDelay: `${index * .15}s`, transitionDuration: ".15s"}}>
+										<div style={{height: `${info.level * 16.5}%`, animationDuration: "1s", animationDelay: `${0.15 * index}s`}}
+															className={`flowerStem ${animationClassName[0]}`}></div>
+								</div>
+						</div>)
+				)
+		}
+
+		setTimeout(() => {
+				setDogClassName(dogClassName.replace("characterFall", "characterWalking"));
+		}, 1000)
 
 		return (
 				<div className={"resumeMain"}>
-						<div className="scene1">
-								<div className="onGround" style={sceneMove}>
-										<div className="resumeTitle">
+						{/*<h1>{animateShowDomList[0].current.className}</h1>*/}
+						<div className="scene1" style={sceneMove}>
+								<div className="onGround">
+										<div className="resumeTitle animate__fadeIn" style={{animationDuration: "1s"}}>
 												<img className={"ribbonLeft"} src={pictureConfig.ribbonLeft} alt=""/>
 												<h2 className={"content"}>My Resume</h2>
 												<img className={"ribbonRight"} src={pictureConfig.ribbonRight} alt=""/>
@@ -84,11 +174,134 @@ function MyResume() {
 										<div className={`characterWalking ${dogClassName}`} ref={characterDom} style={dogAnimation}></div>
 										{getCloud(1)}
 										{getTree(1)}
+										{getGate()}
+										<div className="mySkill noDisplay" ref={skillDom}>
+												<div className="gradeLevel">
+														{getGradeLevel()}
+												</div>
+												<div className="skillGrade">
+														{getSkillGradeResult()}
+												</div>
+										</div>
 								</div>
-								<div className="underGround" style={sceneMove}>
+								<div className="onConstruction">
+										{getCloud(1)}
+										<div className="titleExperience"></div>
+										<div className="boxes"></div>
+										<div className="firstExperience">
+												<div className="educationExperienceTitle">
+														<span className="leftRibbon"></span>
+														<h2>Education Experience</h2>
+														<span className="rightRibbon"></span>
+												</div>
+												<div className="chainBoxMain">
+														<div className="chainString"></div>
+														<div className="experienceBox">
+																<h3 className="date">September 2019 - June 2023</h3>
+																<div className="schoolName">
+																		Beijing University of Aeronautics and Astronautics
+																</div>
+																<div className="major">Software Engineering</div>
+																<p>
+																		Main courses I've learned: C Programming, Data Structure, Algorithm Design and Analyse, Java OOP
+																		programming, Linux and System Programming and others.
+																</p>
+														</div>
+												</div>
+												<div className="robotMain">
+														<div className="content">
+																<ul>
+																		<li>Received Distinguished Foreign Students Scholarship Award from 2019-2023</li>
+																		<li>Awarded a merit-based scholarship of full tuition fees for four years</li>
+																</ul>
+														</div>
+												</div>
+												<div className="skill"></div>
+										</div>
+										<div className="factory">
+												<div className="window"></div>
+												<div className="door"></div>
+										</div>
+										<div className="firstExperience experience">
+												<div className="educationExperienceTitle">
+														<span className="leftRibbon"></span>
+														<h2>Education Experience</h2>
+														<span className="rightRibbon"></span>
+												</div>
+												<div className="chainBoxMain">
+														<div className="chainString"></div>
+														<div className="experienceBox">
+																<h3 className="date">September 2019 - June 2023</h3>
+																<div className="schoolName">
+																		Beijing University of Aeronautics and Astronautics
+																</div>
+																<div className="major">Software Engineering</div>
+																<p>
+																		Main courses I've learned: C Programming, Data Structure, Algorithm Design and Analyse, Java OOP
+																		programming, Linux and System Programming and others.
+																</p>
+														</div>
+												</div>
+												<div className="robotMain">
+														<div className="content">
+																<ul>
+																		<li>Received Distinguished Foreign Students Scholarship Award from 2019-2023</li>
+																		<li>Awarded a merit-based scholarship of full tuition fees for four years</li>
+																</ul>
+														</div>
+												</div>
+												<div className="skill"></div>
+										</div>
+										<div className="secondExperience experience">
+												<div className="educationExperienceTitle">
+														<span className="leftRibbon"></span>
+														<h2>Working Experience</h2>
+														<span className="rightRibbon"></span>
+												</div>
+												<div className="chainBoxMain">
+														<div className="chainString"></div>
+														<div className="experienceBox">
+																<h3 className="date">July 2022 - October 2023</h3>
+																<div className="schoolName">
+																		Benchmark Tech Malaysia
+																</div>
+																<div className="major">Frontend Engineer</div>
+																<p>
+																		I am responsible for implementing and maintaining the website in this role, cooperate with UI and
+																		backend colleagues. Besides, I also coordinating frontend and testing works in Malaysia with the
+																		Taiwan HQ.
+																</p>
+														</div>
+												</div>
+												<div className="squidMain">
+														<div className="content">
+																{
+																		workExperience.map(res=>
+																				(<div>
+
+																				</div>)
+																		)
+																}
+																<div className="contentOne"></div>
+																<div className="smallCircle"></div>
+														</div>
+														{
+																Array(4).fill("").map((res,index)=>{
+																		return <div className={`squidTentacle tentacle${index}`}></div>
+																})
+														}
+												</div>
+												<div className="skill"></div>
+										</div>
+								</div>
+								<div className="underGround">
 										<div className="ground"></div>
 										<div className="tipsTutorial">
 												Press right or left arrow button to move
+										</div>
+										<div className="constructionGround">
+												<div className="floor"></div>
+												<div className="constructUnderground"></div>
 										</div>
 								</div>
 						</div>

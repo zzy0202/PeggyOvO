@@ -6,7 +6,7 @@ import documentPicture2 from "../images/homepage/picture2.png"
 import tree1Picture from "../images/homepage/pop_tree_right1.png"
 import tree2Picture from "../images/homepage/pop_tree_right2.png"
 import pinkDotPicture from "../images/homepage/dot.png"
-
+import "animate.css"
 import myAvatar from "../images/homepage/contact/avatar.png"
 
 import "../styles/Home.scss"
@@ -50,13 +50,11 @@ function Home() {
 				navigate("/myResume");
 		}
 
-		console.log("slalsa,ls")
-
 		return (
 				<div className={'homeMain'}>
 						<div className="topBar">
 								<div className="wrapper">
-										<div className={'myName'}>Peggy Choo</div>
+										<div className={'myName animate__fadeIn'}>Peggy Choo</div>
 										<div className={'contactList'}>
 												{getContactList()}
 										</div>
