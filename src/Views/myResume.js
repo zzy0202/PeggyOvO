@@ -1,10 +1,12 @@
 import "../styles/myResume.scss"
-import {cloudConfig, treeConfig, pictureConfig, gateConfig} from "../sceneConfig/sceneConfig";
+import {cloudConfig, gateConfig, pictureConfig, treeConfig} from "../sceneConfig/sceneConfig";
 import {useEffect, useRef, useState} from "react";
 import "animate.css"
 
 let timer = null;
 let initialTimer = null;
+let loadingEndTimer = null;
+let loadingDotInterval = null;
 
 function MyResume() {
 		let numberList = ["One", "Two", "Three", "Four"];
@@ -19,11 +21,15 @@ function MyResume() {
 		let [animationClassName, setAnimationClassName] = useState([]);
 		let [characterMoveDistance, setCharacterMoveDistance] = useState();
 		let [fallingEnd, setFallingEnd] = useState(0);
+		let [isLoadingEnd, setIsLoadingEnd] = useState(0);
+		let [animationDomList,setAnimationDomList] = useState([]);
+		let [toShowList,setToShowList] = useState([]);
 		let workExperience = [
-				{work:"Vue2",percent:"80%"},
-				{work:"React",percent:"15%"},
-				{work:"Node",percent:"5%"},
+				{work: "Vue2", percent: "80%"},
+				{work: "React", percent: "15%"},
+				{work: "Node", percent: "5%"},
 		]
+		let [loadingDotActive, setLoadingDotActive] = useState(0);
 
 
 		function getCloud(sceneNumber) {
@@ -44,14 +50,20 @@ function MyResume() {
 				let timer = setTimeout(() => {
 						setFallingEnd(1);
 						clearTimeout(timer);
-				}, 1100)
+				}, 2300)
 				animateShowDomList.push(skillDom)
-		}, [])
+
+				loadingEndTimer = setTimeout(()=>{
+						setIsLoadingEnd(1);
+				},1200)
+
+				let temp = document.querySelectorAll(".needToAnimate");
+				setAnimationDomList([...temp]);
+		}, [isLoadingEnd,fallingEnd])
 
 		useEffect(() => {
 				for (const [index, animationElement] of animateShowDomList.entries()) {
 						let {offsetLeft} = animationElement.current;
-						console.log(characterMoveDistance, offsetLeft);
 						if (offsetLeft - characterDom.current.offsetLeft <= 350 && offsetLeft !== 0 && !isNaN(characterMoveDistance)) {
 								animationElement.current.className = animationElement.current.className.replace("noDisplay", "");
 								let temp = animationClassName;
@@ -59,6 +71,15 @@ function MyResume() {
 								setAnimationClassName([...temp]);
 						}
 				}
+
+				animationDomList.forEach((value, index) => {
+						let {left} = value.getBoundingClientRect();
+						if(left<=innerWidth-1050 && !toShowList[index]) {
+								let temp = toShowList;
+								temp[index] = true;
+								setToShowList([...temp]);
+						}
+				})
 		}, [characterMoveDistance, animateShowDomList])
 
 		useEffect(() => {
@@ -83,7 +104,15 @@ function MyResume() {
 						if (timer === null && e.key === 'ArrowLeft' && fallingEnd) {
 								let left = parseInt(dogAnimation.left.split("%")[0]);
 								let sceneLeft = parseInt(sceneMove.left.split("%")[0]);
-								if (sceneLeft === 0) {
+								if (sceneLeft >= 0) {
+										sceneLeft = 0
+										left = 0;
+										setDogAnimation({
+												...dogAnimation,
+												transform: "rotateY(180deg)",
+												left: 10 + "%"
+										})
+										setSceneMove({...sceneMove, left: `${0}%`});
 										return;
 								}
 								setDogAnimation({
@@ -159,11 +188,24 @@ function MyResume() {
 
 		setTimeout(() => {
 				setDogClassName(dogClassName.replace("characterFall", "characterWalking"));
-		}, 1000)
+		}, 2300)
 
 		return (
 				<div className={"resumeMain"}>
+						<div className="wrapperPreload"></div>
 						{/*<h1>{animateShowDomList[0].current.className}</h1>*/}
+						<div className={`loadingPage ${isLoadingEnd?"noDisplay":""}`}>
+								<div className="leftRibbon"></div>
+								<div className="loading">
+										<span className={"loadingText"}>Loading</span>
+										<div className="loadingBullets">
+												{
+														Array(4).fill("").map((res,index) => <span style={{backgroundColor:loadingDotActive===index?"pink":"white"}} className={"bullet"}></span>)
+												}
+										</div>
+								</div>
+								<div className="rightRibbon"></div>
+						</div>
 						<div className="scene1" style={sceneMove}>
 								<div className="onGround">
 										<div className="resumeTitle animate__fadeIn" style={{animationDuration: "1s"}}>
@@ -188,13 +230,15 @@ function MyResume() {
 										{getCloud(1)}
 										<div className="titleExperience"></div>
 										<div className="boxes"></div>
-										<div className="firstExperience">
+										<div className="tower tower1"></div>
+										{/*${animateShowDomList[0].isShow?"show":""}*/}
+										<div className={`firstExperience needToAnimate`}>
 												<div className="educationExperienceTitle">
 														<span className="leftRibbon"></span>
 														<h2>Education Experience</h2>
 														<span className="rightRibbon"></span>
 												</div>
-												<div className="chainBoxMain">
+												<div className={`chainBoxMain ${toShowList[0]?"animate__fadeInDownBig show":""}`} style={{animationDuration:"1s"}}>
 														<div className="chainString"></div>
 														<div className="experienceBox">
 																<h3 className="date">September 2019 - June 2023</h3>
@@ -208,8 +252,8 @@ function MyResume() {
 																</p>
 														</div>
 												</div>
-												<div className="robotMain">
-														<div className="content">
+												<div className={`robotMain ${toShowList[0]?"animate__fadeInRightBig show":""}`} style={{animationDuration:"1s"}}>
+														<div className={`content ${toShowList[0]?"show":""}`} style={{animationDuration:"1s",animationDelay:"1s"}}>
 																<ul>
 																		<li>Received Distinguished Foreign Students Scholarship Award from 2019-2023</li>
 																		<li>Awarded a merit-based scholarship of full tuition fees for four years</li>
@@ -222,43 +266,13 @@ function MyResume() {
 												<div className="window"></div>
 												<div className="door"></div>
 										</div>
-										<div className="firstExperience experience">
-												<div className="educationExperienceTitle">
-														<span className="leftRibbon"></span>
-														<h2>Education Experience</h2>
-														<span className="rightRibbon"></span>
-												</div>
-												<div className="chainBoxMain">
-														<div className="chainString"></div>
-														<div className="experienceBox">
-																<h3 className="date">September 2019 - June 2023</h3>
-																<div className="schoolName">
-																		Beijing University of Aeronautics and Astronautics
-																</div>
-																<div className="major">Software Engineering</div>
-																<p>
-																		Main courses I've learned: C Programming, Data Structure, Algorithm Design and Analyse, Java OOP
-																		programming, Linux and System Programming and others.
-																</p>
-														</div>
-												</div>
-												<div className="robotMain">
-														<div className="content">
-																<ul>
-																		<li>Received Distinguished Foreign Students Scholarship Award from 2019-2023</li>
-																		<li>Awarded a merit-based scholarship of full tuition fees for four years</li>
-																</ul>
-														</div>
-												</div>
-												<div className="skill"></div>
-										</div>
-										<div className="secondExperience experience">
+										<div className={`secondExperience experience needToAnimate`} >
 												<div className="educationExperienceTitle">
 														<span className="leftRibbon"></span>
 														<h2>Working Experience</h2>
 														<span className="rightRibbon"></span>
 												</div>
-												<div className="chainBoxMain">
+												<div className={`chainBoxMain ${toShowList[1]?"animate__fadeInDownBig show":""}`} style={{animationDuration:"1s"}}>
 														<div className="chainString"></div>
 														<div className="experienceBox">
 																<h3 className="date">July 2022 - October 2023</h3>
@@ -273,20 +287,20 @@ function MyResume() {
 																</p>
 														</div>
 												</div>
-												<div className="squidMain">
+												<div className={`squidMain ${toShowList[1]?"animate__fadeInRightBig show":""}`} style={{animationDuration:"1s"}}>
 														<div className="content">
 																{
-																		workExperience.map(res=>
-																				(<div>
-
+																		workExperience.map((res, index) =>
+																				(<div key={res.work + index} className={`contentUnit content${index}`}>
+																						<div>{res.work}</div>
+																						<div>{res.percent}</div>
 																				</div>)
 																		)
 																}
-																<div className="contentOne"></div>
 																<div className="smallCircle"></div>
 														</div>
 														{
-																Array(4).fill("").map((res,index)=>{
+																Array(4).fill("").map((res, index) => {
 																		return <div className={`squidTentacle tentacle${index}`}></div>
 																})
 														}

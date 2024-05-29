@@ -5,6 +5,79 @@
 .resumeMain {
   display: flex;
   overflow: hidden;
+  .wrapperPreload {
+    animation: characterWalk 0.1s linear;
+    width: 0;
+    height: 0;
+    &::before {
+      animation: characterFallAnimation 0.1s linear;
+    }
+  }
+
+  .loadingPage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(0, 191, 243);
+    z-index: 9999;
+    justify-content: center;
+    transition: all 1s;
+    opacity: 1;
+    display: flex;
+    &.noDisplay {
+      opacity: 0;
+      top: -100vh;
+    }
+    .leftRibbon,.rightRibbon {
+      height: 230px;
+      width: 80px;
+      background-image: url("../images/myResume/preload_left_ribbon.png");
+      position: relative;
+      top: 30%;
+    }
+    .rightRibbon {
+      background-image: url("../images/myResume/preload_right_ribbon.png");
+    }
+    overflow: hidden;
+    .loading {
+      position: relative;
+      top: 30%;
+      background-color: rgb(242,109,125);
+      font-family: "Poetsen One", sans-serif;
+      //padding:3.5% 0 3% 0;
+      color: white;
+      font-size: 80px;
+      box-sizing: border-box;
+      max-height: 190px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      .loadingText {
+        padding: 0 22px;
+        display: inline-block;
+        height: fit-content;
+      }
+      .loadingBullets {
+        width: fit-content;
+        height: 20px;
+        display: flex;
+        margin-top: 5%;
+        .bullet {
+          width: 12px;
+          height: 12px;
+          border-radius: 15px;
+          background-color: white;
+          display: inline-block;
+          margin: 0 3px;
+          animation: pinkDotLoading 1s linear infinite;
+        }
+      }
+    }
+  }
 
   .scene1 {
     -webkit-user-select: none;
@@ -71,7 +144,9 @@
         z-index: 999;
         background-image: url("../images/myResume/character/fall/Fall_1.png");
         animation: characterFallAnimation 1s linear;
+        animation-delay: 1.2s;
         transition: bottom 1s;
+        transition-delay: 1.2s;
       }
 
       .mySkill {
@@ -264,6 +339,15 @@
         bottom: 0;
       }
 
+      .tower {
+        height: 100%;
+        width: 1.45%;
+        background-image: url("../images/myResume/tower.png");
+        position: absolute;
+        left: 16.2%;
+        z-index: 0;
+      }
+
       .firstExperience, .experience {
         width: 13%;
         height: 100%;
@@ -318,6 +402,10 @@
           flex-direction: column;
           align-items: center;
           z-index: 0;
+          opacity: 0;
+          &.show {
+            opacity: 1;
+          }
 
           .chainString {
             width: 6%;
@@ -335,7 +423,7 @@
               content: "";
               background-image: url("../images/myResume/constructionSite/chain_block.png");
               position: absolute;
-              bottom: -23.5%;
+              bottom: -24.5%;
               left: -72%;
               background-size: contain;
               background-repeat: no-repeat;
@@ -389,7 +477,10 @@
           top: calc(50% - 20%);
           background: url("../images/myResume/constructionSite/robot1.png") no-repeat;
           background-size: cover;
-
+          opacity: 0;
+          &.show {
+            opacity: 1;
+          }
           &::before {
             width: 32%;
             height: 34.25%;
@@ -421,6 +512,12 @@
             height: 80%;
             position: relative;
             top: 17%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            transition-delay: 1s;
+            &.show {
+              opacity: 1;
+            }
 
             ul {
               color: white;
@@ -443,6 +540,10 @@
           background-size: contain;
           top: 20%;
           right: 2%;
+          opacity: 0;
+          &.show {
+            opacity: 1;
+          }
           .content {
             width: 66.66%;
             height: 55.27%;
@@ -451,16 +552,40 @@
             margin: 0 auto;
             position: relative;
             top: 3.5%;
+            .contentUnit {
+              position: absolute;
+              font-family: "Poetsen One", sans-serif;
+              color: white;
+              font-size: 27px;
+              div {
+                text-align: center;
+              }
+              &.content0 {
+                top: 39%;
+                left: 13%;
+              }
+              &.content1 {
+                top: 26%;
+                left: 70%;
+              }
+              &.content2 {
+                top: 54%;
+                left: 71%;
+              }
+            }
             .smallCircle {
               width: 100%;
               height: 100%;
               background-image: url("../images/myResume/constructionSite/piechart-front.png");
+              background-size: cover;
+              background-repeat: no-repeat;
             }
           }
           .squidTentacle {
             width: 17.77%;
             height: 15.26%;
             background-image: url("../images/myResume/constructionSite/squid_hand_close.png");
+            background-size: contain;
             position: absolute;
             bottom: 12%;
             left: -11%;

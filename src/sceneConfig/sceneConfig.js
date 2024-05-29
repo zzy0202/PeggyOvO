@@ -48,7 +48,7 @@ export let treeConfig = {
 
 export let gateConfig = [
 		{width: "5.7%", bottom: "0%", left: "37%", url: gate, zIndex: 2, innerText: "Level 1"},
-		{width: "5.7%", bottom: "0%", left: "97%", url: gate, zIndex: 2, innerText: "Level 2"}
+		{width: "5.71%", bottom: "0%", left: "97%", url: gate, zIndex: 2, innerText: "Level 2"}
 ]
 
 export let pictureConfig = {
