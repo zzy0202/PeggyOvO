@@ -12,6 +12,13 @@
     &::before {
       animation: characterFallAnimation 0.1s linear;
     }
+    &::after {
+      animation: characterJump 0.1s linear;
+      width: 0;
+      height: 0;
+      display: inline-block;
+      content:""
+    }
   }
 
   .loadingPage {
@@ -23,11 +30,11 @@
     background-color: rgb(0, 191, 243);
     z-index: 9999;
     justify-content: center;
-    transition: all 1s;
+    transition: all .6s;
     opacity: 1;
     display: flex;
     &.noDisplay {
-      opacity: 0;
+      opacity: 1;
       top: -100vh;
     }
     .leftRibbon,.rightRibbon {
@@ -70,12 +77,32 @@
           width: 12px;
           height: 12px;
           border-radius: 15px;
-          background-color: white;
           display: inline-block;
           margin: 0 3px;
-          animation: pinkDotLoading 1s linear infinite;
+          background-color: white;
+          animation: pinkDotLoading .6s ease-in-out infinite;
         }
       }
+    }
+  }
+
+  @keyframes pinkDotLoading {
+    0% {
+      transform: scale(.8);
+      background-color: pink;
+    }
+    10%{
+      background-color: white;
+    }
+    50% {
+      transform: scale(1);
+    }
+    90% {
+      background-color: white;
+    }
+    100% {
+      transform: scale(.8);
+      background-color: pink;
     }
   }
 
@@ -157,11 +184,7 @@
         display: flex;
         //align-items: center;
         align-items: flex-end;
-        //opacity: 1;
-        //transition: opacity 1s;
-        //&.noDisplay {
-        //  opacity: 0;
-        //}
+
 
         .gradeLevel {
           width: 100%;
@@ -523,6 +546,10 @@
               color: white;
               font-family: "Poetsen One", sans-serif;
               line-height: 30px;
+              font-size: 18px;
+              li {
+                margin-bottom: 7%;
+              }
             }
           }
         }
@@ -552,6 +579,12 @@
             margin: 0 auto;
             position: relative;
             top: 3.5%;
+            opacity: 0;
+            transition: opacity 1s;
+            transition-delay: 1s;
+            &.show {
+              opacity: 1;
+            }
             .contentUnit {
               position: absolute;
               font-family: "Poetsen One", sans-serif;
@@ -608,6 +641,62 @@
         .experienceBox {
           p {
             max-width: 490px !important;
+          }
+        }
+      }
+
+      .endingContent {
+        width: 60vw;
+        height: 100%;
+        position: absolute;
+        left: 53%;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        .toBeContinue {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: fit-content;
+          margin: 5% auto 0;
+          position: relative;
+          opacity: 0;
+          z-index: 2;
+          &.show {
+            opacity: 1;
+          }
+
+          .flagTop {
+            width: 520px;
+            height: 23px;
+            background-image: url("../images/myResume/constructionSite/flag_top.png");
+          }
+          .flagBottom {
+            width: 480px;
+            height: 56px;
+            background-image: url("../images/myResume/constructionSite/flag_bottom.png");
+          }
+          h2 {
+            background-color: #f26d7d;
+            color: white;
+            width: 480px;
+            font-size: 40px;
+            text-align: center;
+            margin: 0;
+          }
+        }
+        .celebrationPaper {
+          position: relative;
+          width: 480px;
+          margin: 0 auto;
+          height: auto;
+          flex-grow: 1;
+          //overflow: hidden;
+          .paper {
+            position: absolute;
+            animation: paperAnimation 3s linear infinite;
+            //top: 102%;
           }
         }
       }
@@ -848,6 +937,62 @@
   }
 }
 
+@keyframes characterJump {
+  0% {
+    background-image: url("../images/myResume/character/jump/Jump_1.png");
+  }
+  3.6% {
+    background-image: url("../images/myResume/character/jump/Jump_2.png");
+  }
+  7.28% {
+    background-image: url("../images/myResume/character/jump/Jump_3.png");
+  }
+  10.82% {
+    background-image: url("../images/myResume/character/jump/Jump_4.png");
+  }
+  14.56% {
+    background-image: url("../images/myResume/character/jump/Jump_5.png");
+  }
+  17.70% {
+    background-image: url("../images/myResume/character/jump/Jump_6.png");
+  }
+  21.84% {
+    background-image: url("../images/myResume/character/jump/Jump_7.png");
+  }
+  25% {
+    background-image: url("../images/myResume/character/jump/Jump_8.png");
+  }
+
+
+  28.14% {
+    background-image: url("../images/myResume/character/jump/Jump_7.png");
+  }
+  32.28% {
+    background-image: url("../images/myResume/character/jump/Jump_6.png");
+  }
+  35.42% {
+    background-image: url("../images/myResume/character/jump/Jump_5.png");
+  }
+  39.56% {
+    background-image: url("../images/myResume/character/jump/Jump_4.png");
+  }
+  42.70% {
+    background-image: url("../images/myResume/character/jump/Jump_3.png");
+  }
+  46.84% {
+    background-image: url("../images/myResume/character/jump/Jump_2.png");
+  }
+  50% {
+    background-image: url("../images/myResume/character/jump/Jump_1.png");
+  }
+  54% {
+    background-image: url("../images/myResume/character/idle/Idle_1.png");
+  }
+  100% {
+    background-image: url("../images/myResume/character/idle/Idle_1.png");
+  }
+}
+
 @keyframes flashWord {
   0% {
     display: block;
@@ -857,6 +1002,15 @@
   }
   100% {
     display: none;
+  }
+}
+
+@keyframes paperAnimation {
+  0% {
+    top: -5%;
+  }
+  100% {
+    top: 102%;
   }
 }
 

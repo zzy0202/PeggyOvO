@@ -22,15 +22,16 @@ function MyResume() {
 		let [characterMoveDistance, setCharacterMoveDistance] = useState();
 		let [fallingEnd, setFallingEnd] = useState(0);
 		let [isLoadingEnd, setIsLoadingEnd] = useState(0);
-		let [animationDomList,setAnimationDomList] = useState([]);
-		let [toShowList,setToShowList] = useState([]);
+		let [animationDomList, setAnimationDomList] = useState([]);
+		let [toShowList, setToShowList] = useState({});
 		let workExperience = [
 				{work: "Vue2", percent: "80%"},
 				{work: "React", percent: "15%"},
 				{work: "Node", percent: "5%"},
 		]
 		let [loadingDotActive, setLoadingDotActive] = useState(0);
-
+		let [testingInterval, setTestingInterval] = useState(null);
+		let [paperProperty,setpaperProperty] = useState([]);
 
 		function getCloud(sceneNumber) {
 				let getCloudInfo = cloudConfig[`scene${numberList[sceneNumber - 1]}Config`];
@@ -53,13 +54,13 @@ function MyResume() {
 				}, 2300)
 				animateShowDomList.push(skillDom)
 
-				loadingEndTimer = setTimeout(()=>{
+				loadingEndTimer = setTimeout(() => {
 						setIsLoadingEnd(1);
-				},1200)
+				}, 1200)
 
 				let temp = document.querySelectorAll(".needToAnimate");
 				setAnimationDomList([...temp]);
-		}, [isLoadingEnd,fallingEnd])
+		}, [isLoadingEnd, fallingEnd])
 
 		useEffect(() => {
 				for (const [index, animationElement] of animateShowDomList.entries()) {
@@ -74,26 +75,37 @@ function MyResume() {
 
 				animationDomList.forEach((value, index) => {
 						let {left} = value.getBoundingClientRect();
-						if(left<=innerWidth-1050 && !toShowList[index]) {
+						if (left <= innerWidth - 1050 && !toShowList[index]) {
 								let temp = toShowList;
+								console.log(toShowList);
 								temp[index] = true;
-								setToShowList([...temp]);
+								setToShowList(temp);
 						}
 				})
-		}, [characterMoveDistance, animateShowDomList])
+		}, [characterMoveDistance, animateShowDomList,toShowList])
 
 		useEffect(() => {
 				initialTimer = window.onkeydown = (e) => {
 						if (timer === null && e.key === 'ArrowRight' && fallingEnd) {
 								let left = parseInt(dogAnimation.left.split("%")[0]);
 								let sceneLeft = parseInt(sceneMove.left.split("%")[0]);
+								console.log(left);
+								if (left >= 183) {
+										setDogAnimation({
+												...dogAnimation,
+												transform: "rotateY(0deg)",
+												animation: "characterJump 1000ms ease-out infinite",
+												left: left + "%"
+										})
+										return 0;
+								}
 								setDogAnimation({
 										...dogAnimation,
 										transform: "rotateY(0deg)",
 										animation: "characterWalk .5s ease-out",
 										left: left + 3 + "%"
 								})
-								setSceneMove({...sceneMove, left: `${sceneLeft - 8.6}%`})
+								setSceneMove({...sceneMove, left: `${sceneLeft - 8.7}%`})
 								timer = setTimeout(() => {
 										timer = null;
 										setCharacterMoveDistance(characterDom.current.offsetLeft);
@@ -190,17 +202,44 @@ function MyResume() {
 				setDogClassName(dogClassName.replace("characterFall", "characterWalking"));
 		}, 2300)
 
+		function getColorPaper() {
+				let arr = [];
+				for (let i = 0; i < paperProperty.length; i++) {
+						arr.push(<div className={"paper"} style={paperProperty[i]}></div>)
+				}
+				return arr;
+		}
+
+		useEffect(()=>{
+				let paperAmount = 60;
+						let arr = [];
+						for (let i = 0; i < paperAmount; i++) {
+								let style = {
+										width:`${Math.round(Math.random()*10+4)}px`,
+										height:`${Math.round(Math.random()*10+4)}px`,
+										backgroundColor:`#${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, "0")}`,
+										left:`${Math.round(Math.random()*95)}%`,
+										transform:`rotate(${Math.floor(Math.random()*360)}deg)`,
+										animation: `paperAnimation ${Math.random()*3+1.5}s linear infinite`,
+										// top:"-5%",
+										// animation:`paperAnimation ${Math.random()*3}s linear`
+								}
+								arr.push(style)
+						}
+						setpaperProperty(arr);
+		},[])
+
 		return (
 				<div className={"resumeMain"}>
 						<div className="wrapperPreload"></div>
 						{/*<h1>{animateShowDomList[0].current.className}</h1>*/}
-						<div className={`loadingPage ${isLoadingEnd?"noDisplay":""}`}>
+						<div className={`loadingPage ${isLoadingEnd ? "noDisplay" : ""}`}>
 								<div className="leftRibbon"></div>
 								<div className="loading">
 										<span className={"loadingText"}>Loading</span>
 										<div className="loadingBullets">
 												{
-														Array(4).fill("").map((res,index) => <span style={{backgroundColor:loadingDotActive===index?"pink":"white"}} className={"bullet"}></span>)
+														Array(4).fill("").map((res, index) => <span style={{animationDelay:`${index*.1}s`}} className={`bullet ${index}`}></span>)
 												}
 										</div>
 								</div>
@@ -238,7 +277,8 @@ function MyResume() {
 														<h2>Education Experience</h2>
 														<span className="rightRibbon"></span>
 												</div>
-												<div className={`chainBoxMain ${toShowList[0]?"animate__fadeInDownBig show":""}`} style={{animationDuration:"1s"}}>
+												<div className={`chainBoxMain ${toShowList[0] ? "animate__fadeInDownBig show" : ""}`}
+																	style={{animationDuration: "1s"}}>
 														<div className="chainString"></div>
 														<div className="experienceBox">
 																<h3 className="date">September 2019 - June 2023</h3>
@@ -252,8 +292,10 @@ function MyResume() {
 																</p>
 														</div>
 												</div>
-												<div className={`robotMain ${toShowList[0]?"animate__fadeInRightBig show":""}`} style={{animationDuration:"1s"}}>
-														<div className={`content ${toShowList[0]?"show":""}`} style={{animationDuration:"1s",animationDelay:"1s"}}>
+												<div className={`robotMain ${toShowList[0] ? "animate__fadeInRightBig show" : ""}`}
+																	style={{animationDuration: "1s"}}>
+														<div className={`content ${toShowList[0] ? "show" : ""}`}
+																			style={{animationDuration: "1s", animationDelay: "1s"}}>
 																<ul>
 																		<li>Received Distinguished Foreign Students Scholarship Award from 2019-2023</li>
 																		<li>Awarded a merit-based scholarship of full tuition fees for four years</li>
@@ -266,13 +308,14 @@ function MyResume() {
 												<div className="window"></div>
 												<div className="door"></div>
 										</div>
-										<div className={`secondExperience experience needToAnimate`} >
+										<div className={`secondExperience experience needToAnimate`}>
 												<div className="educationExperienceTitle">
 														<span className="leftRibbon"></span>
 														<h2>Working Experience</h2>
 														<span className="rightRibbon"></span>
 												</div>
-												<div className={`chainBoxMain ${toShowList[1]?"animate__fadeInDownBig show":""}`} style={{animationDuration:"1s"}}>
+												<div className={`chainBoxMain ${toShowList[1] ? "animate__fadeInDownBig show" : ""}`}
+																	style={{animationDuration: "1s"}}>
 														<div className="chainString"></div>
 														<div className="experienceBox">
 																<h3 className="date">July 2022 - October 2023</h3>
@@ -287,8 +330,10 @@ function MyResume() {
 																</p>
 														</div>
 												</div>
-												<div className={`squidMain ${toShowList[1]?"animate__fadeInRightBig show":""}`} style={{animationDuration:"1s"}}>
-														<div className="content">
+												<div className={`squidMain ${toShowList[1] ? "animate__fadeInRightBig show" : ""}`}
+																	style={{animationDuration: "1s"}}>
+														<div className={`content ${toShowList[1] ? "show" : ""}`}
+																			style={{animationDuration: "1s", animationDelay: "1s"}}>
 																{
 																		workExperience.map((res, index) =>
 																				(<div key={res.work + index} className={`contentUnit content${index}`}>
@@ -306,6 +351,19 @@ function MyResume() {
 														}
 												</div>
 												<div className="skill"></div>
+										</div>
+										<div className="endingContent needToAnimate">
+												<div className={`toBeContinue ${toShowList[2] ? "animate__fadeInDown show" : ""}`}
+																	style={{animationDuration: "1s"}}>
+														<div className="flagTop"></div>
+														<h2>To be continue ;)</h2>
+														<div className="flagBottom"></div>
+												</div>
+												<div className="celebrationPaper">
+														{
+																getColorPaper()
+														}
+												</div>
 										</div>
 								</div>
 								<div className="underGround">
