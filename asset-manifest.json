@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/PeggyOvO/static/css/main.0d52dbe8.css",
-    "main.js": "/PeggyOvO/static/js/main.2e7a1a4a.js",
+    "main.css": "/PeggyOvO/static/css/main.c78c43cf.css",
+    "main.js": "/PeggyOvO/static/js/main.c3fb0af4.js",
     "static/js/453.1407b060.chunk.js": "/PeggyOvO/static/js/453.1407b060.chunk.js",
     "static/media/avatar.png": "/PeggyOvO/static/media/avatar.d5dbb7fdff60caae4232.png",
     "static/media/mainBackground.jpg": "/PeggyOvO/static/media/mainBackground.0bfccd655a025d6f11c6.jpg",
@@ -39,12 +39,12 @@
     "static/media/experience_title.png": "/PeggyOvO/static/media/experience_title.d2348a52178b02033aa6.png",
     "static/media/logo.svg": "/PeggyOvO/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/PeggyOvO/index.html",
-    "main.0d52dbe8.css.map": "/PeggyOvO/static/css/main.0d52dbe8.css.map",
-    "main.2e7a1a4a.js.map": "/PeggyOvO/static/js/main.2e7a1a4a.js.map",
+    "main.c78c43cf.css.map": "/PeggyOvO/static/css/main.c78c43cf.css.map",
+    "main.c3fb0af4.js.map": "/PeggyOvO/static/js/main.c3fb0af4.js.map",
     "453.1407b060.chunk.js.map": "/PeggyOvO/static/js/453.1407b060.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0d52dbe8.css",
-    "static/js/main.2e7a1a4a.js"
+    "static/css/main.c78c43cf.css",
+    "static/js/main.c3fb0af4.js"
   ]
 }
