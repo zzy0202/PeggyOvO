@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createHashRouter} from "react-router-dom";
 import Home from "../Views/Home";
 import MyResume from "../Views/myResume";
 
@@ -13,4 +13,4 @@ const routes = [
 		}
 ]
 
-export default createBrowserRouter(routes);
+export default createHashRouter(routes);

@@ -90,7 +90,7 @@ function MyResume() {
 								let left = parseInt(dogAnimation.left.split("%")[0]);
 								let sceneLeft = parseInt(sceneMove.left.split("%")[0]);
 								console.log(left);
-								if (left >= 183) {
+								if (left >= 181) {
 										setDogAnimation({
 												...dogAnimation,
 												transform: "rotateY(0deg)",
@@ -212,21 +212,21 @@ function MyResume() {
 
 		useEffect(()=>{
 				let paperAmount = 60;
-						let arr = [];
-						for (let i = 0; i < paperAmount; i++) {
-								let style = {
-										width:`${Math.round(Math.random()*10+4)}px`,
-										height:`${Math.round(Math.random()*10+4)}px`,
-										backgroundColor:`#${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, "0")}`,
-										left:`${Math.round(Math.random()*95)}%`,
-										transform:`rotate(${Math.floor(Math.random()*360)}deg)`,
-										animation: `paperAnimation ${Math.random()*3+1.5}s linear infinite`,
-										// top:"-5%",
-										// animation:`paperAnimation ${Math.random()*3}s linear`
-								}
-								arr.push(style)
+				let arr = [];
+				for (let i = 0; i < paperAmount; i++) {
+						let style = {
+								width:`${Math.round(Math.random()*10+4)}px`,
+								height:`${Math.round(Math.random()*10+4)}px`,
+								backgroundColor:`#${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, "0")}`,
+								left:`${Math.round(Math.random()*95)}%`,
+								transform:`rotate(${Math.floor(Math.random()*360)}deg)`,
+								animation: `paperAnimation ${Math.random()*3+1.5}s linear infinite`,
+								// top:"-5%",
+								// animation:`paperAnimation ${Math.random()*3}s linear`
 						}
-						setpaperProperty(arr);
+						arr.push(style)
+				}
+				setpaperProperty(arr);
 		},[])
 
 		return (
@@ -355,11 +355,11 @@ function MyResume() {
 										<div className="endingContent needToAnimate">
 												<div className={`toBeContinue ${toShowList[2] ? "animate__fadeInDown show" : ""}`}
 																	style={{animationDuration: "1s"}}>
-														<div className="flagTop"></div>
+														<div className={`flagTop`}></div>
 														<h2>To be continue ;)</h2>
 														<div className="flagBottom"></div>
 												</div>
-												<div className="celebrationPaper">
+												<div className={`celebrationPaper ${toShowList[2]?"show":""}`}>
 														{
 																getColorPaper()
 														}

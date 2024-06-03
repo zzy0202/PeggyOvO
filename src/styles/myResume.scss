@@ -5,19 +5,22 @@
 .resumeMain {
   display: flex;
   overflow: hidden;
+
   .wrapperPreload {
     animation: characterWalk 0.1s linear;
     width: 0;
     height: 0;
+
     &::before {
       animation: characterFallAnimation 0.1s linear;
     }
+
     &::after {
       animation: characterJump 0.1s linear;
       width: 0;
       height: 0;
       display: inline-block;
-      content:""
+      content: ""
     }
   }
 
@@ -33,25 +36,30 @@
     transition: all .6s;
     opacity: 1;
     display: flex;
+
     &.noDisplay {
       opacity: 1;
       top: -100vh;
     }
-    .leftRibbon,.rightRibbon {
+
+    .leftRibbon, .rightRibbon {
       height: 230px;
       width: 80px;
       background-image: url("../images/myResume/preload_left_ribbon.png");
       position: relative;
       top: 30%;
     }
+
     .rightRibbon {
       background-image: url("../images/myResume/preload_right_ribbon.png");
     }
+
     overflow: hidden;
+
     .loading {
       position: relative;
       top: 30%;
-      background-color: rgb(242,109,125);
+      background-color: rgb(242, 109, 125);
       font-family: "Poetsen One", sans-serif;
       //padding:3.5% 0 3% 0;
       color: white;
@@ -63,16 +71,19 @@
       flex-direction: column;
       align-items: center;
       overflow: hidden;
+
       .loadingText {
         padding: 0 22px;
         display: inline-block;
         height: fit-content;
       }
+
       .loadingBullets {
         width: fit-content;
         height: 20px;
         display: flex;
         margin-top: 5%;
+
         .bullet {
           width: 12px;
           height: 12px;
@@ -91,7 +102,7 @@
       transform: scale(.8);
       background-color: pink;
     }
-    10%{
+    10% {
       background-color: white;
     }
     50% {
@@ -426,6 +437,7 @@
           align-items: center;
           z-index: 0;
           opacity: 0;
+
           &.show {
             opacity: 1;
           }
@@ -501,9 +513,11 @@
           background: url("../images/myResume/constructionSite/robot1.png") no-repeat;
           background-size: cover;
           opacity: 0;
+
           &.show {
             opacity: 1;
           }
+
           &::before {
             width: 32%;
             height: 34.25%;
@@ -538,6 +552,7 @@
             opacity: 0;
             transition: opacity 1s ease-in-out;
             transition-delay: 1s;
+
             &.show {
               opacity: 1;
             }
@@ -547,6 +562,7 @@
               font-family: "Poetsen One", sans-serif;
               line-height: 30px;
               font-size: 18px;
+
               li {
                 margin-bottom: 7%;
               }
@@ -568,44 +584,53 @@
           top: 20%;
           right: 2%;
           opacity: 0;
+
           &.show {
             opacity: 1;
           }
+
           .content {
             width: 66.66%;
             height: 55.27%;
             border-radius: 66%;
-            background-color: rgb(237,28,36);
+            background-color: rgb(237, 28, 36);
             margin: 0 auto;
             position: relative;
             top: 3.5%;
             opacity: 0;
             transition: opacity 1s;
             transition-delay: 1s;
+
             &.show {
               opacity: 1;
             }
+
             .contentUnit {
               position: absolute;
               font-family: "Poetsen One", sans-serif;
               color: white;
               font-size: 27px;
+
               div {
                 text-align: center;
               }
+
               &.content0 {
                 top: 39%;
                 left: 13%;
               }
+
               &.content1 {
                 top: 26%;
                 left: 70%;
               }
+
               &.content2 {
                 top: 54%;
                 left: 71%;
               }
             }
+
             .smallCircle {
               width: 100%;
               height: 100%;
@@ -614,6 +639,7 @@
               background-repeat: no-repeat;
             }
           }
+
           .squidTentacle {
             width: 17.77%;
             height: 15.26%;
@@ -622,15 +648,18 @@
             position: absolute;
             bottom: 12%;
             left: -11%;
+
             &.tentacle1 {
               bottom: -5%;
               left: 9%;
             }
+
             &.tentacle2 {
               bottom: -5%;
               left: 73.2%;
               transform: rotateY(180deg);
             }
+
             &.tentacle3 {
               bottom: 12%;
               left: 93.2%;
@@ -638,6 +667,7 @@
             }
           }
         }
+
         .experienceBox {
           p {
             max-width: 490px !important;
@@ -653,6 +683,7 @@
         bottom: 0;
         display: flex;
         flex-direction: column;
+
         .toBeContinue {
           display: flex;
           flex-direction: column;
@@ -663,6 +694,8 @@
           position: relative;
           opacity: 0;
           z-index: 2;
+          left: -6%;
+
           &.show {
             opacity: 1;
           }
@@ -672,20 +705,25 @@
             height: 23px;
             background-image: url("../images/myResume/constructionSite/flag_top.png");
           }
+
           .flagBottom {
             width: 480px;
             height: 56px;
             background-image: url("../images/myResume/constructionSite/flag_bottom.png");
           }
+
           h2 {
-            background-color: #f26d7d;
             color: white;
             width: 480px;
             font-size: 40px;
             text-align: center;
+            background-color: #f26d7d;
             margin: 0;
+            padding: 3% 0;
+            position: relative;
           }
         }
+
         .celebrationPaper {
           position: relative;
           width: 480px;
@@ -693,6 +731,12 @@
           height: auto;
           flex-grow: 1;
           //overflow: hidden;
+          left: -6%;
+          opacity: 0;
+          transition-delay: 1s;
+          &.show {
+            opacity: 1;
+          }
           .paper {
             position: absolute;
             animation: paperAnimation 3s linear infinite;
