@@ -77,7 +77,6 @@ function MyResume() {
 						let {left} = value.getBoundingClientRect();
 						if (left <= innerWidth - 1050 && !toShowList[index]) {
 								let temp = toShowList;
-								console.log(toShowList);
 								temp[index] = true;
 								setToShowList(temp);
 						}
@@ -89,7 +88,6 @@ function MyResume() {
 						if (timer === null && e.key === 'ArrowRight' && fallingEnd) {
 								let left = parseInt(dogAnimation.left.split("%")[0]);
 								let sceneLeft = parseInt(sceneMove.left.split("%")[0]);
-								console.log(left);
 								if (left >= 181) {
 										setDogAnimation({
 												...dogAnimation,

@@ -13,6 +13,10 @@
 
     &::before {
       animation: characterFallAnimation 0.1s linear;
+      width: 0;
+      height: 0;
+      display: inline-block;
+      content:"";
     }
 
     &::after {
@@ -20,7 +24,7 @@
       width: 0;
       height: 0;
       display: inline-block;
-      content: ""
+      content: "";
     }
   }
 
@@ -380,6 +384,9 @@
         position: absolute;
         left: 16.2%;
         z-index: 0;
+        //background-repeat: no-repeat;
+        //background-size: 100% 100%;
+        max-width: 110px;
       }
 
       .firstExperience, .experience {
@@ -506,13 +513,15 @@
         .robotMain {
           width: 50.3%;
           height: 51.7%;
+          //width: 500px;
+          //height: 399px;
           position: absolute;
           right: 0;
           z-index: 2;
-          top: calc(50% - 20%);
+          top: calc(50% - 15%);
           background: url("../images/myResume/constructionSite/robot1.png") no-repeat;
-          background-size: cover;
           opacity: 0;
+          background-size: contain;
 
           &.show {
             opacity: 1;
@@ -528,6 +537,7 @@
             bottom: -21%;
             left: -12.5%;
             animation: robotHandRotates 3s infinite linear;
+            background-size: contain;
             //-17.5%
           }
 
@@ -541,6 +551,7 @@
             bottom: -21%;
             right: -12.5%;
             animation: robotHandRotates 3s infinite linear;
+            background-size: contain;
           }
 
           .content {
@@ -600,6 +611,8 @@
             opacity: 0;
             transition: opacity 1s;
             transition-delay: 1s;
+            //max-width: 300px;
+            //max-height: 300px;
 
             &.show {
               opacity: 1;
@@ -635,37 +648,37 @@
               width: 100%;
               height: 100%;
               background-image: url("../images/myResume/constructionSite/piechart-front.png");
-              background-size: cover;
+              background-size: 100% 100%;
               background-repeat: no-repeat;
             }
           }
 
-          .squidTentacle {
-            width: 17.77%;
-            height: 15.26%;
-            background-image: url("../images/myResume/constructionSite/squid_hand_close.png");
-            background-size: contain;
-            position: absolute;
-            bottom: 12%;
-            left: -11%;
-
-            &.tentacle1 {
-              bottom: -5%;
-              left: 9%;
-            }
-
-            &.tentacle2 {
-              bottom: -5%;
-              left: 73.2%;
-              transform: rotateY(180deg);
-            }
-
-            &.tentacle3 {
-              bottom: 12%;
-              left: 93.2%;
-              transform: rotateY(180deg);
-            }
-          }
+          //.squidTentacle {
+          //  width: 17.77%;
+          //  height: 15.26%;
+          //  background-image: url("../images/myResume/constructionSite/squid_hand_close.png");
+          //  background-size: contain;
+          //  position: absolute;
+          //  bottom: 12%;
+          //  left: -11%;
+          //
+          //  &.tentacle1 {
+          //    bottom: -5%;
+          //    left: 9%;
+          //  }
+          //
+          //  &.tentacle2 {
+          //    bottom: -5%;
+          //    left: 73.2%;
+          //    transform: rotateY(180deg);
+          //  }
+          //
+          //  &.tentacle3 {
+          //    bottom: 12%;
+          //    left: 93.2%;
+          //    transform: rotateY(180deg);
+          //  }
+          //}
         }
 
         .experienceBox {

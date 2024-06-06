@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "version": "0.1.0",
-  "homepage": "https://zzy0202.github.io/peggyOvO",
+  "homepage": "https://gitname.github.io/PeggyOvO",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
